@@ -73,6 +73,7 @@ UpdateKnowledgeBranch = function(branch, amount, LoseBranchKnowledge)
         print("[^4Sky's Scripts^0]"..Lang['branch_doesnt_exist']:format(branch))
         return
     end
+    local id = SS_Utils.GetIdentification()
     local BranchXP = CurrentBranches[branch]
     local Tier = GetBranchTier(BranchXP,branch)
     local Levels = Config.Branches[branch].customLevels or Config.DefaultLevels
@@ -95,20 +96,42 @@ UpdateKnowledgeBranch = function(branch, amount, LoseBranchKnowledge)
     else
         CurrentBranches[branch] = CurrentBranches[branch] + amount
     end
+    if Config.Branches[branch].messages.enable then
+        if tonumber(amount) > 0 then
+            for k, v in pairs(Config.Branches[branch].messages.positive) do
+                if CurrentBranches[branch] > v.xp and BranchXP < v.xp then
+                    if Config.Branches[branch].messages.notifytype == "notification" then
+                        SS_Core.Notification({title = v.subject, message = v.message})
+                    elseif Config.Branches[branch].messages.notifytype == "email" then
+                        SS_Utils.EmailNotification(id,{message = v.message, sender = v.sender, subject = v.subject})
+                    end
+                end
+            end
+        elseif tonumber(amount) < 0 then
+            for k, v in pairs(Config.Branches[branch].messages.negative) do
+                if CurrentBranches[branch] < v.xp and BranchXP > v.xp then
+                    if Config.Branches[branch].messages.notifytype == "notification" then
+                        SS_Core.Notification({title = v.subject, message = v.message})
+                    elseif Config.Branches[branch].messages.notifytype == "email" then
+                        SS_Utils.EmailNotification(id,{message = v.message, sender = v.sender, subject = v.subject})
+                    end
+                end
+            end
+        elseif tonumber(amount) == 0 then
+        end
+    end
     if Config.Notification.enable and tonumber(amount) > 0 then
         SS_Core.Notification({title = Lang["notification_add_knowledge_title"], message = Lang["notification_add_knowledge_to_branch"]:format(amount, branch)})
         if Config.Notification.email.enable and (Levels ~= {} or nil) then
-
             if Levels[tonumber(Tier+1)] ~= nil then
                 if CurrentBranches[branch] > Levels[Tier].maxxp and BranchXP < Levels[tonumber(Tier+1)].minxp then
-                    local id = SS_Utils.GetIdentification()
                     SS_Utils.EmailNotification(id,{message = Lang['level_up_email_message']:format(branch, tonumber(Tier+1)), sender = Lang['level_up_email_sender'], subject = Lang['level_up_email_subject']})
                 end
             end
         end
     elseif Config.Notification.enable and tonumber(amount) < 0 and BranchXP ~= 0 and LoseBranchKnowledge and Config.LoseBranchKnowledge.notification then
         SS_Core.Notification({title = Lang["notification_remove_knowledge_title"], message = Lang["notification_remove_knowledge_from_all_branches"]:format(amount, branch)})
-    elseif Config.Notification.enable and tonumber(amount) < 0 and BranchXP ~= 0 and not LoseBranchKnowledge then
+    elseif Config.Notification.enable and tonumber(amount) < 0 and BranchXP ~= 0 and LoseBranchKnowledge == false then
     elseif Config.Notification.enable and tonumber(amount) < 0 and BranchXP ~= 0 then
         SS_Core.Notification({title = Lang["notification_remove_knowledge_title"], message = Lang["notification_remove_knowledge_to_branch"]:format(amount, branch)})
     end

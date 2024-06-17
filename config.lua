@@ -21,15 +21,13 @@ Config = {
 	},
 
     AdminOptions = {
-        enable = true, -- This is used for allowing commands through admin perms to be run (set by ace permmissions)
+        enable = true,-- This is used for allowing commands through admin perms to be run (set by ace permmissions)
         ranks = {"admin","superadmin","god"}, -- Ace permission ranks allowed to use the admin commands for altering xp amounts of players.
         inputType = "command", -- if inputType == "command" it will require you to add command args (will require player indentifier used for character). 
                                -- if inputType == "ox" or "qb" then it will use input menus from ox_lib or qb
         commands = {
             addxp = "addxp",
             removexp = "removexp",
-            offlineremovexp = "offlineremovexp",
-            offlineaddxp = "offlineaddxp",
             checkplayerbranch = "checkplayerbranch",
         },
     },
@@ -48,7 +46,7 @@ Config = {
     },
 
     LoseBranchKnowledge = {
-    enable = true, -- if set to true over time you will loose a little of your branches xp.
+    enable = true,-- if set to true over time you will loose a little of your branches xp.
     notification = true, -- if set to true and enabled is true players will get a notification telling them they lost some xp
     update = 15, --Update every x minutes to database.    
     min = 1, -- Minimum lost when enabled.
@@ -76,7 +74,7 @@ Config = {
 
 
     Notification = {
-        enable = true, -- If enabled you can send nofitications when xp is added, removed/spent.
+        enable = true,-- If enabled you can send nofitications when xp is added, removed/spent.
         notifytype = "qb",  --'qb', 'ox', 'okok', 'esx' 
         email = { -- If enabled emails will be triggered when you level up or down a skill.
             enable = true,
@@ -102,21 +100,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },]]
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -134,21 +133,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -166,21 +166,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -199,21 +200,22 @@ Config = {
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
                 {title = 'Zeus\'d', minxp = 15001, maxxp = 150000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
-                notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
+                notifytype = 'email',
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 18500, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 13500, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -231,21 +233,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -263,21 +266,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },]]
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -295,21 +299,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -327,21 +332,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -359,21 +365,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -391,21 +398,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -423,21 +431,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -455,21 +464,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore" , sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand" , sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick" , sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now" , sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" , sender = 'Sky', subject = 'Update to branch'},
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore" },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand" },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick" },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now" },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore" , sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand" , sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 200, message = "You're getting good with a lockpick" , sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 300, message = "You feel like you're nailing lockpicking now" , sender = 'Sky', subject = 'Update to branch'},
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!" , sender = 'Sky', subject = 'Update to branch'},
                 }
             }
         },
@@ -487,21 +497,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
                 }
             }
         },
@@ -519,21 +530,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notify = 'notification' xp are message are needed if notify = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'notification',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
                 }
             }
         },
@@ -551,21 +563,22 @@ Config = {
                 {title = 'Professional', minxp = 6401, maxxp = 12800},
                 {title = 'God Like', minxp = 12801, maxxp = 15000},
             },
-            messages = { -- If enabled then if notifytype = 'notification' xp are message are needed if notifytype = 'email' when please a [email = 'sender name'] and [subject = 'Yo Booty']
+            messages = { -- If enabled then if notify = 'notification' messages and subject (is used as title for compatible notify systems) are needed. if notify = 'email' then it will use subject,message and sender. change these to what you wish
+                enable = true,
                 notifytype = 'email',
-                postive = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
+                positive = {
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
                 },
                 negative = {
-                    { enable = true, xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
-                    { enable = true, xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 50, message = "You're not horrible with that lockpick anymore", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 100, message = "You start feeling better with that lockpick in your hand", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 200, message = "You're getting good with a lockpick", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 300, message = "You feel like you're nailing lockpicking now", sender = 'Sky', subject = 'Update to branch' },
+                    { xp = 350, message = "No tumbler will go untouched. You're like the Lockpicking Lawyer!", sender = 'Sky', subject = 'Update to branch' },
                 }
             }
         },
