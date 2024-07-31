@@ -74,16 +74,18 @@ SS_Core = {
     end,
 
     Notification = function(data)
-        if Config.Notification.enable and (Config.Notification.notifytype == 'qb' or Config.Notification.notifytype == 'esx') then
-            if ESX ~= nil then
-                ESX.ShowNotification(data.message, false, true, nil)
-            elseif QBCore ~= nil then
-                QBCore.Functions.Notify(data.message)
+        if Config.Notification.enable then
+            if Config.Notification.notifytype == 'qb' or Config.Notification.notifytype == 'esx' then
+                if ESX ~= nil then
+                    ESX.ShowNotification(data.message, false, true, nil)
+                elseif QBCore ~= nil then
+                    QBCore.Functions.Notify(data.message)
+                end
+            elseif Config.Notification.notifytype == 'ox' then
+                SS_Utils.Notification(data)
+            elseif Config.Notification.notifytype == 'okok' then
+                SS_Utils.Notification(data)
             end
-        elseif Config.Notification.enable and Config.Notification.notifytype == 'ox' then
-            SS_Utils.Notification(data)
-        elseif Config.Notification.enable and Config.Notification.notifytype == 'okok' then
-            SS_Utils.Notification(data)
         end
     end,
 }

@@ -4,8 +4,10 @@ FetchDBBranches = function(source)
     if Player ~= nil then
         local id = Player.PlayerData.citizenid or Player.PlayerData.identifier
         local branches = MySQL.scalar.await('SELECT skills FROM '..Config.Triggers[Framework].playerdatabase..' WHERE citizenid = ?', {id})
-        if string.len(branches) > 3 then
-            return SortBranches(json.decode(branches))
+        if branches ~= nil then
+            if string.len(branches) > 3 then
+                return SortBranches(json.decode(branches))
+            end
         else
             branches = SetupBranches()
             UpdateDBBranches(source, json.encode(branches))
@@ -52,7 +54,7 @@ end
 
 AddEventHandler('onResourceStart', function(resource)
 	if resource == GetCurrentResourceName() then
-		SS_Utils.VersionCheck("ss-knowledge","skys-scripts/ss-knowledge")
+		SS_Utils.VersionCheck("ss-knowledge","skys-scripts/ss-knowledge",false)
 	end
 end)
 

@@ -7,15 +7,17 @@ end
 SS_Utils = {
 
     Notification = function(data)
-		if Config.UseFrameworkNotification then
-			SS_Core.Notification(data.message)
-		else
+		if Config.Notification.notifytype == 'ox' then
 			lib.notify({
 				title = data.title,
 				description = data.message,
 				type = data.type,
 				position = 'top-right',
 			})
+		elseif Config.Notification.notifytype == 'okok' then
+			exports['okokNotify']:Alert(data.title, data.message, 6000, data.type)
+		elseif Config.Notification.notifytype == 't-notify' then
+			exports['t-notify']:Custom({title = data.title, style = data.type, message = data.message, sound = true})
 		end
 	end,
 

@@ -4,7 +4,7 @@ game 'gta5'
 author 'Sky\'s Scripts'
 description 'Multi use knowledge/rep/xp resource'
 
-version '1.0'
+version '1.1'
 
 shared_scripts {
     '@ox_lib/init.lua',

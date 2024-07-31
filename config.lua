@@ -22,9 +22,8 @@ Config = {
 
     AdminOptions = {
         enable = true,-- This is used for allowing commands through admin perms to be run (set by ace permmissions)
-        ranks = {"admin","superadmin","god"}, -- Ace permission ranks allowed to use the admin commands for altering xp amounts of players.
-        inputType = "command", -- if inputType == "command" it will require you to add command args (will require player indentifier used for character). 
-                               -- if inputType == "ox" or "qb" then it will use input menus from ox_lib or qb
+        ranks = {"admin","superadmin","command","qbcore.god"}, -- Ace permission ranks allowed to use the admin commands for altering xp amounts of players.
+        inputType = "command", -- only inputType == "command" available currently. It requires you to add command args (will require player indentifier (server/state id) used for character). 
         commands = {
             addxp = "addxp",
             removexp = "removexp",
@@ -32,7 +31,7 @@ Config = {
         },
     },
 
-	Debug = true, -- For debug prints set to true.
+	Debug = false, -- For debug prints set to true.
 
     DefaultLevels = { -- Level system to check xp amount modify to change xp per level.
         {title = Lang['default_level_1'], minxp = 00, maxxp = 200},
@@ -46,11 +45,11 @@ Config = {
     },
 
     LoseBranchKnowledge = {
-    enable = true,-- if set to true over time you will loose a little of your branches xp.
-    notification = true, -- if set to true and enabled is true players will get a notification telling them they lost some xp
-    update = 15, --Update every x minutes to database.    
-    min = 1, -- Minimum lost when enabled.
-    max = 10, -- Maximum lost when enabled.
+        enable = true,-- if set to true over time you will loose a little of your branches xp.
+        notification = true, -- if set to true and enabled is true players will get a notification telling them they lost some xp
+        update = 15, --Update every x minutes to database.    
+        min = 1, -- Minimum lost when enabled.
+        max = 10, -- Maximum lost when enabled.
     },
 
     Menu = {
@@ -65,7 +64,7 @@ Config = {
         },
     },
 
-    KnowledgeTitle = "Knowledge Branches", -- Easiest place to change this is in language.lua. all locale 
+    KnowledgeTitle = "Knowledge Branches", -- Title label for the menu/list of branches.
 
     ChatCommand = { -- when enabled this will allow a slash chat commmand
         enable = true,
@@ -79,9 +78,6 @@ Config = {
         email = { -- If enabled emails will be triggered when you level up or down a skill.
             enable = true,
             type = 'qb-phone', -- 'lb-phone', 'qb-phone', 'qs-phone'. if a phone is used it will send an email else if 'nil' it will be a standard Notification
-                defaultemails = {
-                    
-                }
         },
     },
 

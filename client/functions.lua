@@ -49,6 +49,7 @@ exports('GetBranchTier', GetBranchTier)
 GetCurrentKnowledgeBranch = function(branch)
     if Config.Branches[branch] then
         if CurrentBranches[branch] then
+            print(json.encode(CurrentBranches[branch]))
             return GetKnowledgeBranch(CurrentBranches[branch],branch)
         else
             print("[^4Sky's Scripts^0] ^1User missing branch from config's branch list. Missing branch: ^0[^3"..tostring(branch).."^0]")
@@ -66,7 +67,6 @@ FetchKnowledgeBranch = function()
 		CurrentBranches = data
     end)
 end
-exports('FetchKnowledgeBranch', FetchKnowledgeBranch)
 
 UpdateKnowledgeBranch = function(branch, amount, LoseBranchKnowledge)
     if not CurrentBranches[branch] then
@@ -75,7 +75,13 @@ UpdateKnowledgeBranch = function(branch, amount, LoseBranchKnowledge)
     end
     local id = SS_Utils.GetIdentification()
     local BranchXP = CurrentBranches[branch]
-    local Tier = GetBranchTier(BranchXP,branch)
+    local Tier = 0
+    if type(BranchXP) == "table" then
+        BranchXP = BranchXP.Current
+        Tier = GetBranchTier(BranchXP,branch)
+    else
+        Tier = GetBranchTier(BranchXP,branch)
+    end
     local Levels = Config.Branches[branch].customLevels or Config.DefaultLevels
     if BranchXP + tonumber(amount) < 0 then
         CurrentBranches[branch] = 0
@@ -131,7 +137,7 @@ UpdateKnowledgeBranch = function(branch, amount, LoseBranchKnowledge)
         end
     elseif Config.Notification.enable and tonumber(amount) < 0 and BranchXP ~= 0 and LoseBranchKnowledge and Config.LoseBranchKnowledge.notification then
         SS_Core.Notification({title = Lang["notification_remove_knowledge_title"], message = Lang["notification_remove_knowledge_from_all_branches"]:format(amount, branch)})
-    elseif Config.Notification.enable and tonumber(amount) < 0 and BranchXP ~= 0 and LoseBranchKnowledge == false then
+    elseif Config.Notification.enable and tonumber(amount) < 0 and BranchXP ~= 0 and (LoseBranchKnowledge == false or nil) then
     elseif Config.Notification.enable and tonumber(amount) < 0 and BranchXP ~= 0 then
         SS_Core.Notification({title = Lang["notification_remove_knowledge_title"], message = Lang["notification_remove_knowledge_to_branch"]:format(amount, branch)})
     end
@@ -139,21 +145,35 @@ UpdateKnowledgeBranch = function(branch, amount, LoseBranchKnowledge)
 end
 exports('UpdateKnowledgeBranch', UpdateKnowledgeBranch)
 
-CheckKnowledgeBranch = function(skill, value)
-    if CurrentBranches[skill] then
-        if CurrentBranches[skill] >= tonumber(value) then
+CheckKnowledgeBranch = function(branch, value)
+    if CurrentBranches[branch] then
+        if CurrentBranches[branch] >= tonumber(value) then
             return true
         else
             return false
         end
     else
-        print(Lang['branch_doesnt_exist']:format(skill))
+        print(Lang['branch_doesnt_exist']:format(branch))
         return false
     end
 end
 exports('CheckKnowledgeBranch', CheckKnowledgeBranch)
 
--- mz/ b1 skill system bridge maybe cw too?
+CheckKnowledgeTier = function(branch, value)
+    if CurrentBranches[branch] then
+        if GetBranchTier(CurrentBranches[branch],branch) >= value then
+            return true
+        else
+            return false
+        end
+    else
+        print(Lang['branch_doesnt_exist']:format(branch))
+        return false
+    end
+end
+exports('CheckKnowledgeTier', CheckKnowledgeTier)
+
+-- mz skill system bridge maybe b1 skills too?
 GetCurrentSkill = function(skill)
     local branch, branchInfo = GetCurrentKnowledgeBranch(skill)
     if branchInfo ~= nil then

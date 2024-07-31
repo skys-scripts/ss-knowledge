@@ -6,6 +6,9 @@ CreateKnowledgeBranchList = function()
             isHeader = true,
             header = Config.KnowledgeTitle,
             isMenuHeader = true,
+            args = {
+                "header"
+            },
             icon = 'fas fa-chart-simple'
         }
     end
@@ -66,7 +69,9 @@ CreateKnowledgeBranchList = function()
         end)
     elseif Config.Menu.sort == 'xp' then
         table.sort(options, function(a, b)
-            if a.args[1] == 0 and b.args[1] ~= 0 then
+            if type(b.args[1]) == "string" then
+                return false
+            elseif a.args[1] == 0 and b.args[1] ~= 0 then
                 return false
             elseif a.args[1] ~= 0 and b.args[1] == 0 then
                 return true

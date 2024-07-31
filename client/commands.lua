@@ -1,6 +1,6 @@
 if Config.AdminOptions.enable then
     RegisterNetEvent(Config.Triggers[Framework].load, function()
-        SS_Core.TriggerCallback("ss-knowledge:server:CheckAdminCoammnds", function(results)
+        SS_Core.TriggerCallback("ss-knowledge:server:CheckAdminCommands", function(results)
             TriggerEvent("ss-knowledge:client:debug", "^4Admin permission results: ^0 ^3"..tostring(results))
             if results then
                 GiveAdminCommands()
@@ -23,9 +23,9 @@ GiveAdminCommands = function()
         end
         SS_Core.TriggerCallback("ss-knowledge:server:fetchBranches", function(data)
             local PlayerBranches = data
-            TriggerEvent('ss-knowledge:client:debug',"Before adding xp: "..PlayerBranches[args[2]])
+            TriggerEvent('ss-knowledge:client:debug',"^4Before adding xp: ^3"..PlayerBranches[args[2]])
             PlayerBranches[args[2]] = PlayerBranches[args[2]] + args[3]
-            TriggerEvent('ss-knowledge:client:debug',"After adding xp: "..PlayerBranches[args[2]])
+            TriggerEvent('ss-knowledge:client:debug',"^4After adding xp: ^3"..PlayerBranches[args[2]])
             TriggerServerEvent("ss-knowledge:server:updateBranches", json.encode(PlayerBranches), args[1])
         end, args[1])
     end, false)
@@ -37,14 +37,14 @@ GiveAdminCommands = function()
         end
         SS_Core.TriggerCallback("ss-knowledge:server:fetchBranches", function(data)
             local PlayerBranches = data
-            TriggerEvent('ss-knowledge:client:debug',"Before removing xp: "..PlayerBranches[args[2]])
+            TriggerEvent('ss-knowledge:client:debug',"^4Before removing xp: ^3"..PlayerBranches[args[2]])
             PlayerBranches[args[2]] = PlayerBranches[args[2]] - args[3]
-            TriggerEvent('ss-knowledge:client:debug',"After removing xp: "..PlayerBranches[args[2]])
+            TriggerEvent('ss-knowledge:client:debug',"^4After removing xp: ^3"..PlayerBranches[args[2]])
             TriggerServerEvent("ss-knowledge:server:updateBranches", json.encode(PlayerBranches), args[1])
         end, args[1])
     end, false)
     TriggerEvent("chat:addSuggestion", "/"..Config.AdminOptions.commands.removexp, Lang['removexp_help_arg_1'],{{ name = Lang['removexp_name_arg_2'], help = Lang['removexp_help_arg_2'] }, { name = Lang['removexp_name_arg_3'], help = Lang['removexp_help_arg_3'] }, { name = Lang['removexp_name_arg_4'], help = Lang['removexp_help_arg_4']}})
-    
+
     RegisterCommand(Config.AdminOptions.commands.checkplayerbranch, function(source,args,rawCommand)
         if args[1] == nil or args[2] == nil then
             return SS_Core.Notification({title = Lang['missing_args_title'], message = Lang['missing_args_message']:format(Config.AdminOptions.commands.checkplayerbranch)})

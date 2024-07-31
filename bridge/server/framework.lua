@@ -10,7 +10,7 @@ end
 SS_Core = {
 
     Notification = function(src, data)
-        if Config.UseFrameworkNotification then
+        if Config.Notification.enable then
             if Framework == 'ESX' then
                 TriggerClientEvent('esx:showNotification', src, data.message)
             elseif Framework == 'QB' then
@@ -78,7 +78,7 @@ SS_Core.RegisterCallback("ss-knowledge:server:fetchBranches", function(source, c
     cb(branches)
 end)
 
-SS_Core.RegisterCallback("ss-knowledge:server:CheckAdminCoammnds", function(source, cb)
+SS_Core.RegisterCallback("ss-knowledge:server:CheckAdminCommands", function(source, cb)
     cb(SS_Core.Player.IsAdmin(source))
 end)
 
@@ -91,6 +91,5 @@ SS_Core.RegisterCallback("ss-knowledge:server:getPlayerName", function(source, c
     end
     local firstname = player.PlayerData.firstname or player.PlayerData.charinfo.firstname
     local lastname = player.PlayerData.lastname or player.PlayerData.charinfo.lastname
-    local name = tostring(firstname.." "..lastname.." ["..(oID or source).."]")
-    cb(name)
+    cb(tostring(firstname.." "..lastname.." ["..(oID or source).."]"))
 end)
