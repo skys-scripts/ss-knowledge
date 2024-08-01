@@ -7,7 +7,7 @@ description 'Multi use knowledge/rep/xp resource'
 version '1.1'
 
 shared_scripts {
-    '@ox_lib/init.lua',
+    '@ox_lib/init.lua', -- if not using ox_lib options please mark this out with the 2 -'s like i have to write this comment
     'language.lua',
 	'config.lua',
 }

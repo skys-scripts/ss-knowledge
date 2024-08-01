@@ -1,14 +1,13 @@
- Lang = { -- PLEASE NOTE %s is used for added varaibles from the script itself. This can range from the name of the branch to the amount of xp added.
+Lang = { -- PLEASE NOTE %s is used for added varaibles from the script itself. This can range from the name of the branch to the amount of xp added.
     -- Default level names
-    ['default_level_0'] = 'Unskilled',
-    ['default_level_1'] = 'Beginner',
-    ['default_level_2'] = 'Amateur',
-    ['default_level_3'] = 'Intermediate',
-    ['default_level_4'] = 'Competent',
-    ['default_level_5'] = 'Skilled',
-    ['default_level_6'] = 'Adept',
-    ['default_level_7'] = 'Master',
-    ['default_level_8'] = 'Proficient',
+    ['default_level_1'] = 'Initiate',
+    ['default_level_2'] = 'Hobbyist',
+    ['default_level_3'] = 'Mediocre',
+    ['default_level_4'] = 'Qualified',
+    ['default_level_5'] = 'Accomplished',
+    ['default_level_6'] = 'Versatile',
+    ['default_level_7'] = 'Sage',
+    ['default_level_8'] = 'Maestro',
 
     --Debug options
     ['branch_doesnt_exist'] = "^1This branch doesn't exist in your current list. Missing branch: ^0[^3 %s ^0]", -- Branch name
