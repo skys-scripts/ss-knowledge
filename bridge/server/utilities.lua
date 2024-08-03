@@ -34,11 +34,19 @@ SS_Utils = {
                         local current, minimum = tonumber(cv[i]), tonumber(lv[i])
 
                         if current ~= minimum then
-                            if current < minimum and not paid then
-                                print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4is outdated^0 - ^4Your Version:^0 [^3"..currentVersion.."^0] \n^4Latest Version:^0 [^3"..latestVersion.."^0] - ^1Please update ^0[^3"..resource.."^0]^4 through the github repo or keymaster.^0\n[^5https://github.com/"..repository.."/releases^0]")
-                            elseif current < minimum and paid then
-                                print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4is outdated^0 - ^4Your Version:^0 [^3"..currentVersion.."^0] \n^4Latest Version:^0 [^3"..latestVersion.."^0] - ^1Please update ^0[^3"..resource.."^0]^4 through keymaster.^0")
-                            else break end
+                            if minimum ~= nil then
+                                if current < minimum and not paid then
+                                    print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4is outdated^0 - ^4Your Version:^0 [^3"..currentVersion.."^0] \n^4Latest Version:^0 [^3"..latestVersion.."^0] - ^1Please update ^0[^3"..resource.."^0]^4 through the github repo or keymaster.^0\n[^5https://github.com/"..repository.."/releases^0]")
+                                elseif current < minimum and paid then
+                                    print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4is outdated^0 - ^4Your Version:^0 [^3"..currentVersion.."^0] \n^4Latest Version:^0 [^3"..latestVersion.."^0] - ^1Please update ^0[^3"..resource.."^0]^4 through keymaster.^0")
+                                else break end
+                            else
+                                if not paid then
+                                    print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4has a version newer than expected^0 - ^4Your Version:^0 [^3"..currentVersion.."^0] \n^4Latest Version:^0 [^3"..latestVersion.."^0] - ^1If you aren't testing a new version please downgrade to the release for ^0[^3"..resource.."^0]^4 through the github repo or keymaster.^0\n[^5https://github.com/"..repository.."/releases^0]")
+                                elseif paid then
+                                    print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4has a version newer than expected ^4Your Version:^0 [^3"..currentVersion.."^0] \n^4Latest Version:^0 [^3"..latestVersion.."^0] - ^1If you aren't testing a new version please downgrade to the release for ^0[^3"..resource.."^0]^4 through keymaster.^0")
+                                else break end
+                            end
                         end
                     end
                 end

@@ -6,7 +6,8 @@ Config = {
 			obj = 'esx:getSharedObject',
 			load = 'esx:playerLoaded',
 			job = 'esx:setJob',
-            playerdatabase = 'users' -- This is the table that is used for for your player's indentifier or citizenid 
+            playerdatabase = 'users', -- This is the table that is used for for your player's indentifier or citizenid 
+            playerid = 'identifier'
 		},
 		['QB'] = { -- update your triggers or event-names here if you've changed them from default values
 			resource = 'qb-core', -- qb-core resource name
@@ -16,13 +17,14 @@ Config = {
 			uObjCL = 'QBCore:Client:UpdateObject',
 			uObjSV = 'QBCore:Server:UpdateObject',
 			dutyToggle = 'QBCore:ToggleDuty',
-            playerdatabase = 'players' -- This is the table that is used for for your player's indentifier or citizenid 
+            playerdatabase = 'players', -- This is the table that is used for for your player's indentifier or citizenid 
+            playerid = 'citizenid'
 		},
 	},
 
     AdminOptions = {
         enable = true,-- This is used for allowing commands through admin perms to be run (set by ace permmissions)
-        ranks = {"admin","superadmin","command","qbcore.god"}, -- Ace permission ranks allowed to use the admin commands for altering xp amounts of players.
+        ranks = {"admin","superadmin","command","group.admin","qbcore.god"}, -- Ace permission ranks allowed to use the admin commands for altering xp amounts of players.
         inputType = "command", -- only inputType == "command" available currently. It requires you to add command args (will require player indentifier (server/state id) used for character). 
         commands = {
             addxp = "addxp",
@@ -31,7 +33,7 @@ Config = {
         },
     },
 
-	Debug = false, -- For debug prints set to true.
+	Debug = true, -- For debug prints set to true.
 
     DefaultLevels = { -- Level system to check xp amount modify to change xp per level.
         {title = Lang['default_level_1'], minxp = 00, maxxp = 200},

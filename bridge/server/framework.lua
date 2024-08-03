@@ -54,6 +54,23 @@ SS_Core.Player = {
         end
     end,
 
+    GetIdentifier = function(src)
+        local Player = SS_Core.Player.GetFromId(tonumber(src))
+        if Framework == 'ESX' then
+            return Player.identifier
+        elseif Framework == 'QB' then
+            return Player.PlayerData.citizenid
+        end
+    end,
+
+    GetCitizenName = function(src)
+        local Player = SS_Core.Player.GetFromId(tonumber(src))
+        if Framework == 'ESX' then
+            return Player.name
+        elseif Framework == 'QB' then
+            return Player.PlayerData.charinfo.firstname.. " "..Player.PlayerData.charinfo.lastname
+        end
+    end,
     IsAdmin = function(src)
         local permissions = Config.AdminOptions.ranks
         TriggerEvent("ss-knowledge:server:debug", "^4Admin ranks able to use commands^0: ^3"..json.encode(permissions).."^0")
@@ -83,13 +100,11 @@ SS_Core.RegisterCallback("ss-knowledge:server:CheckAdminCommands", function(sour
 end)
 
 SS_Core.RegisterCallback("ss-knowledge:server:getPlayerName", function(source, cb, oID)
-    local player = nil
+    local name = nil
     if oID == nil then
-        player = SS_Core.Player.GetFromId(source)
+        name = SS_Core.Player.GetCitizenName(source)
     else
-        player = SS_Core.Player.GetFromId(oID)
+        name = SS_Core.Player.GetCitizenName(oID)
     end
-    local firstname = player.PlayerData.firstname or player.PlayerData.charinfo.firstname
-    local lastname = player.PlayerData.lastname or player.PlayerData.charinfo.lastname
-    cb(tostring(firstname.." "..lastname.." ["..(oID or source).."]"))
+    cb(tostring(name.." ["..(oID or source).."]"))
 end)

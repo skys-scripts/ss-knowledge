@@ -1,9 +1,12 @@
 FetchDBBranches = function(source)
-    local Player = SS_Core.Player.GetFromId(source)
+    local Player = SS_Core.Player.GetFromId(tonumber(source))
+    print(json.encode(Player))
     TriggerEvent("ss-knowledge:server:debug","^4Collecting branch info for player id: ^0[^3"..source.."^0]")
     if Player ~= nil then
-        local id = Player.PlayerData.citizenid or Player.PlayerData.identifier
-        local branches = MySQL.scalar.await('SELECT skills FROM '..Config.Triggers[Framework].playerdatabase..' WHERE citizenid = ?', {id})
+        local id = SS_Core.Player.GetIdentifier(source)
+        print("id: "..id)
+        local branches = MySQL.scalar.await('SELECT skills FROM '..Config.Triggers[Framework].playerdatabase..' WHERE '..Config.Triggers[Framework].playerid..' = ?', {id})
+        print(json.encode(branches))
         if branches ~= nil then
             if string.len(branches) > 3 then
                 return SortBranches(json.decode(branches))
@@ -59,15 +62,15 @@ AddEventHandler('onResourceStart', function(resource)
 end)
 
 UpdateDBBranches = function(source,data,otherID)
-    local Player = nil
+    local PID = nil
     if otherID == nil then
-        Player = SS_Core.Player.GetFromId(source)
-    elseif type(otherID) == "number" then -- This is used to check the length 
-        Player = SS_Core.Player.GetFromId(otherID)
+        PID = SS_Core.Player.GetIdentifier(source)
+    elseif type(otherID) == "number" then -- This is used to check the type of variable "otherID" is
+        PID = SS_Core.Player.GetIdentifier(otherID)
     end
-    MySQL.query('UPDATE '..Config.Triggers[Framework].playerdatabase..' SET skills = @branches WHERE citizenid = @citizenid', { --It is set to a branch column to not cause conflictions with mz/ b1/ cw xp branch systems.
+    MySQL.query('UPDATE '..Config.Triggers[Framework].playerdatabase..' SET skills = @branches WHERE '..Config.Triggers[Framework].playerid..' = @id', { --It is set to a branch column to not cause conflictions with mz/ b1/ cw xp branch systems.
         ['@branches'] = data,
-        ['@citizenid'] = Player.PlayerData.citizenid or Player.PlayerData.identifier or otherID
+        ['@id'] = PID
     })
 end
 
@@ -81,7 +84,7 @@ RegisterServerEvent('ss-knowledge:server:updateBranches', function (data, otherI
     if otherID == nil then
         UpdateDBBranches(source, tostring(data))
     else
-        UpdateDBBranches(source, tostring(data), otherID)
+        UpdateDBBranches(source, tostring(data), tonumber(otherID))
         TriggerClientEvent("ss-knowledge:client:updateBranchesCommand", otherID)
     end
 end)
