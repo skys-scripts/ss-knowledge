@@ -1,20 +1,17 @@
 FetchDBBranches = function(source)
     local Player = SS_Core.Player.GetFromId(tonumber(source))
-    print(json.encode(Player))
     TriggerEvent("ss-knowledge:server:debug","^4Collecting branch info for player id: ^0[^3"..source.."^0]")
     if Player ~= nil then
         local id = SS_Core.Player.GetIdentifier(source)
-        print("id: "..id)
         local branches = MySQL.scalar.await('SELECT skills FROM '..Config.Triggers[Framework].playerdatabase..' WHERE '..Config.Triggers[Framework].playerid..' = ?', {id})
-        print(json.encode(branches))
-        if branches ~= nil then
+        if branches == nil or "null" then
+            branches = SetupBranches()
+            UpdateDBBranches(source, json.encode(branches))
+            return SortBranches(branches)
+        elseif branches ~= nil then
             if string.len(branches) > 3 then
                 return SortBranches(json.decode(branches))
             end
-        else
-            branches = SetupBranches()
-            UpdateDBBranches(source, json.encode(branches))
-            return SortBranches(json.decode(branches))
         end
     end
 end

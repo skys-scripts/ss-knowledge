@@ -1,5 +1,0 @@
-Make code useable in the update branches for client/ server to check config for messages,
-count and if a postive or negative option exists.
-Finish commands including for offline users with admin perms.
-
-{"heistreputation":6989,"truck":8023,"robbing":344,"fishing":0,"garbage":0,"weapon_crafting":0,"lockpicking":0,"crafting":0,"scrapping":0,"street_rep":0,"drug_sales":0,"hotdog":1232,"taxi":333,"hacking":2005,"bus":2395}

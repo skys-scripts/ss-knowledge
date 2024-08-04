@@ -49,7 +49,6 @@ exports('GetBranchTier', GetBranchTier)
 GetCurrentKnowledgeBranch = function(branch)
     if Config.Branches[branch] then
         if CurrentBranches[branch] then
-            print(json.encode(CurrentBranches[branch]))
             return GetKnowledgeBranch(CurrentBranches[branch],branch)
         else
             print("[^4Sky's Scripts^0] ^1User missing branch from config's branch list. Missing branch: ^0[^3"..tostring(branch).."^0]")
