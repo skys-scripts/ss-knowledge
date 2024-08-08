@@ -172,7 +172,6 @@ CheckKnowledgeTier = function(branch, value)
 end
 exports('CheckKnowledgeTier', CheckKnowledgeTier)
 
--- mz skill system bridge maybe b1 skills too?
 GetCurrentSkill = function(skill)
     local branch, branchInfo = GetCurrentKnowledgeBranch(skill)
     if branchInfo ~= nil then
@@ -181,14 +180,19 @@ GetCurrentSkill = function(skill)
         print("[^4Sky's Scripts^0] GetCurrentSkill is causing errors for branchInfo. Please turn on debug and try again.")
     end
 end
+exports('GetCurrentSkill',GetCurrentSkill)
 
 UpdateSkill = function(skill, amount)
     return UpdateKnowledgeBranch(skill, amount)
 end
+exports('UpdateSkill',UpdateSkill)
 
 CheckSkill = function(skill, value, cb)
     return cb(CheckKnowledgeBranch(skill, value))
 end
+exports('CheckSkill',CheckSkill)
+
+-- mz skill system bridge maybe b1 skills too?
 
 local function exportHandler(exportName, func)
     AddEventHandler(('__cfx_export_mz-skills_%s'):format(exportName) or ('__cfx_export_b1-skill_%s'):format(exportName), function(setCB)
