@@ -2,17 +2,16 @@ SS_Utils = {
 
     VersionCheck = function(resource,repository, paid)
         local currentVersion = GetResourceMetadata(resource, 'version', 0)
-        if currentVersion then
-            currentVersion = currentVersion:match('%d%.%d+%.%d+') or currentVersion:match('%d%.%d+')
-        else
+        if not currentVersion then
             print("^4Please contact ^0[^5Sky's Scripts^0]^4 for support and reference this error:^0 ".."^3SS_Util.VersionCheck^0, ^1Can't find current resource version for '%s'^0[^3"..resource.."^0]")
+            return
         end
 
         SetTimeout(1000, function()
             PerformHttpRequest(('https://api.github.com/repos/%s/releases/latest'):format(repository), function(status, response)
                 if status ~= 200 then
-                    if status == 403 then
-                        print("[^5Sky's Scripts^0] ^1Update check for ^0[^3"..resource.."^0] ^1is not available currently. ^0[^3Git API Limitations^0]\n^4You may still get this error if you don't wait a few minutes before restarting the script or server.^0")
+                    if status == 403 or status == 429 then
+                        print("[^5Sky's Scripts^0] ^1Update check for ^0[^3"..resource.."^0] ^1failed. ^0[^3Git API Limitations^0]\n^4You may still get this error for a while when restarting the script or server.^0")
                     else
                         print("^4Please contact ^0[^5Sky's Scripts^0]^4 for support and reference this error:^0 ".." [^3SS_Util.VersionCheck^0]\n^1Check repos and current releases for ^0[^3"..resource.."^0] ^4Status code:^0 [^3"..status.."^0]")
                     end
@@ -25,27 +24,30 @@ SS_Utils = {
                 if not latestVersion then
                     return
                 elseif latestVersion == currentVersion then
-                    print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^2is up to date^0 - ^4Your Version:^0 [^3"..currentVersion.."^0]")
+                    print("[^5Sky's Scripts^0] [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^2is up to date^0 - ^4Your Version:^0 [^3"..currentVersion.."^0]")
                 else
                     local cv = { string.strsplit('.', currentVersion) }
                     local lv = { string.strsplit('.', latestVersion) }
-                
-                    for i = 1, #cv do
-                        local current, minimum = tonumber(cv[i]), tonumber(lv[i])
 
-                        if current ~= minimum then
-                            if minimum ~= nil then
-                                if current < minimum and not paid then
-                                    print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4is outdated^0 - ^4Your Version:^0 [^3"..currentVersion.."^0] \n^4Latest Version:^0 [^3"..latestVersion.."^0] - ^1Please update ^0[^3"..resource.."^0]^4 through the github repo or keymaster.^0\n[^5https://github.com/"..repository.."/releases^0]")
-                                elseif current < minimum and paid then
-                                    print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4is outdated^0 - ^4Your Version:^0 [^3"..currentVersion.."^0] \n^4Latest Version:^0 [^3"..latestVersion.."^0] - ^1Please update ^0[^3"..resource.."^0]^4 through keymaster.^0")
-                                else break end
-                            else
+                    local maxParts = math.min(#cv, #lv)
+                    for i = 1, maxParts do
+                        local current, minimum = tonumber(cv[i] or 0), tonumber(lv[i] or 0)
+                        if i == maxParts then
+                            if (#cv > i and current == minimum and tonumber(cv[i+1] or 0) > tonumber(lv[i+1] or 0)) or (#cv >= i and current > minimum) then
                                 if not paid then
-                                    print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4has a version newer than expected^0 - ^4Your Version:^0 [^3"..currentVersion.."^0] \n^4Latest Version:^0 [^3"..latestVersion.."^0] - ^1If you aren't testing a new version please downgrade to the release for ^0[^3"..resource.."^0]^4 through the github repo or keymaster.^0\n[^5https://github.com/"..repository.."/releases^0]")
+                                    print("[^5Sky's Scripts^0] [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4is newer than expected. Your Version:^0 [^3"..currentVersion.."^0] ^4Latest Version:^0 [^3"..latestVersion.."^0]\n^1Please downgrade to latest release through the github or keymaster for ^0[^3"..resource.."^0]\n[^5https://github.com/"..repository.."/releases^0]")
                                 elseif paid then
-                                    print("[^5Sky's Scripts^0] - [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4has a version newer than expected ^4Your Version:^0 [^3"..currentVersion.."^0] \n^4Latest Version:^0 [^3"..latestVersion.."^0] - ^1If you aren't testing a new version please downgrade to the release for ^0[^3"..resource.."^0]^4 through keymaster.^0")
-                                else break end
+                                    print("[^5Sky's Scripts^0] [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4is newer than expected. Your Version:^0 [^3"..currentVersion.."^0] ^4Latest Version:^0 [^3"..latestVersion.."^0]\n^1Please downgrade to latest release for ^0[^3"..resource.."^0] through the keymaster.")
+                                end
+                            end
+                        end
+                        if current ~= minimum then
+                            if current < minimum then
+                                if not paid then
+                                    print("[^5Sky's Scripts^0] [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4is outdated. Your Version:^0 [^3"..currentVersion.."^0] ^4Latest Version:^0 [^3"..latestVersion.."^0]\n^1Please update ^0[^3"..resource.."^0]^4 through the github or keymaster.^0\n[^5https://github.com/"..repository.."/releases^0]")
+                                else
+                                    print("[^5Sky's Scripts^0] [^3"..string.upper(string.match(resource, "ss%-(.+)")).."^0] ^4is outdated. Your Version:^0 [^3"..currentVersion.."^0] ^4Latest Version:^0 [^3"..latestVersion.."^0]\n^1Please update ^0[^3"..resource.."^0]^4 through keymaster.^0")
+                                end
                             end
                         end
                     end

@@ -1,3 +1,7 @@
+local resourceName = GetCurrentResourceName()
+
+local currentLine = "CLNT>COMMS #"
+
 if Config.AdminOptions.enable then
     RegisterNetEvent(Config.Triggers[Framework].load, function()
         SS_Core.TriggerCallback("ss-knowledge:server:CheckAdminCommands", function(results)
@@ -23,7 +27,7 @@ GiveAdminCommands = function()
         end
         SS_Core.TriggerCallback("ss-knowledge:server:fetchBranches", function(data)
             local PlayerBranches = data
-            TriggerEvent('ss-knowledge:client:debug',"^4Before adding xp: ^3"..PlayerBranches[args[2]])
+            SS_Log("debug","^4Before adding xp: ^3"..PlayerBranches[args[2]], resourceName, true, currentLine.."30")
             PlayerBranches[args[2]] = PlayerBranches[args[2]] + args[3]
             local Levels = Config.Branches[args[2]].customLevels or Config.DefaultLevels
             if PlayerBranches[args[2]] < 0 then
@@ -32,7 +36,7 @@ GiveAdminCommands = function()
             if PlayerBranches[args[2]] > Levels[#Levels].maxxp then
                 PlayerBranches[args[2]] = Levels[#Levels].maxxp
             end
-            TriggerEvent('ss-knowledge:client:debug',"^4After adding xp: ^3"..PlayerBranches[args[2]])
+            SS_Log("debug","^4After adding xp: ^3"..PlayerBranches[args[2]], resourceName, true, currentLine.."39")
             TriggerServerEvent("ss-knowledge:server:updateBranches", json.encode(PlayerBranches), args[1])
         end, args[1])
     end)
@@ -44,7 +48,7 @@ GiveAdminCommands = function()
         end
         SS_Core.TriggerCallback("ss-knowledge:server:fetchBranches", function(data)
             local PlayerBranches = data
-            TriggerEvent('ss-knowledge:client:debug',"^4Before removing xp: ^3"..PlayerBranches[args[2]])
+            SS_Log("debug","^4Before removing xp: ^3"..PlayerBranches[args[2]], resourceName, true, currentLine.."51")
             PlayerBranches[args[2]] = PlayerBranches[args[2]] - args[3]
             local Levels = Config.Branches[args[2]].customLevels or Config.DefaultLevels
             if PlayerBranches[args[2]] < 0 then
@@ -53,7 +57,7 @@ GiveAdminCommands = function()
             if PlayerBranches[args[2]] > Levels[#Levels].maxxp then
                 PlayerBranches[args[2]] = Levels[#Levels].maxxp
             end
-            TriggerEvent('ss-knowledge:client:debug',"^4After removing xp: ^3"..PlayerBranches[args[2]])
+            SS_Log("debug","^4After removing xp: ^3"..PlayerBranches[args[2]], resourceName, true, currentLine.."60")
             TriggerServerEvent("ss-knowledge:server:updateBranches", json.encode(PlayerBranches), args[1])
         end, args[1])
     end)

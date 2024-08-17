@@ -7,6 +7,10 @@ elseif Framework == 'QB' then
     QBCore = exports['qb-core']:GetCoreObject()
 end
 
+local resourceName = GetCurrentResourceName()
+
+local currentLine = "BRDG>SRVR>FRAME #"
+
 SS_Core = {
 
     Notification = function(src, data)
@@ -22,7 +26,7 @@ SS_Core = {
     end,
 
     RegisterCallback = function(name, cb)
-        TriggerEvent('ss-knowledge:server:debug',"^4Server Side - RegisterCallback ^0[^3"..name.."^0]")
+        SS_Log("debug", "^4RegisterCallback ^0[^3"..name.."^0]", resourceName, false, currentLine.."27")
         if Framework == 'ESX' then
             ESX.RegisterServerCallback(name, cb)
         elseif Framework == 'QB' then
@@ -39,6 +43,7 @@ SS_Core.Player = {
             Wait(500)
             xPlayer = SS_Core.Player.GetFromId(tonumber(src))
         end
+        SS_Log("debug", "^4Server Side - GetSource ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."44")
         if Framework == 'ESX' then
             return xPlayer.source
         elseif Framework == 'QB' then
@@ -47,6 +52,7 @@ SS_Core.Player = {
     end,
 
     GetFromId = function(src)
+        SS_Log("debug", "^4Server Side - GetFromId ^0[^3"..(src).."^0]", resourceName, false, currentLine.."55")
         if Framework == 'ESX' then
             return ESX.GetPlayerFromId(src)
         elseif Framework == 'QB' then
@@ -55,6 +61,7 @@ SS_Core.Player = {
     end,
 
     GetIdentifier = function(src)
+        SS_Log("debug", "^4Server Side - GetIdentifier ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."64")
         local Player = SS_Core.Player.GetFromId(tonumber(src))
         if Framework == 'ESX' then
             return Player.identifier
@@ -64,19 +71,20 @@ SS_Core.Player = {
     end,
 
     GetCitizenName = function(src)
+        SS_Log("debug", "^4Server Side - GetCitizenName ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."74")
         local Player = SS_Core.Player.GetFromId(tonumber(src))
         if Framework == 'ESX' then
-            return Player.name
+            return Player.getName()
         elseif Framework == 'QB' then
             return Player.PlayerData.charinfo.firstname.. " "..Player.PlayerData.charinfo.lastname
         end
     end,
     IsAdmin = function(src)
         local permissions = Config.AdminOptions.ranks
-        TriggerEvent("ss-knowledge:server:debug", "^4Admin ranks able to use commands^0: ^3"..json.encode(permissions).."^0")
+        SS_Log("debug", "^4Admin ranks able to use commands^0: ^3"..json.encode(permissions).."^0", resourceName, false, currentLine.."84")
         for k,v in pairs(permissions) do
             if IsPlayerAceAllowed(src, v) then
-                TriggerEvent("ss-knowledge:server:debug", "^4Admin Permission Granted To Player ^0[^3"..src.."^0] ^4Permission Level:^0 [^3"..v.."^0]")
+                SS_Log("debug", "^4Admin Perm Granted ^0[^3"..src.."^0] ^4Level:^0 [^3"..v.."^0]", resourceName, false, currentLine.."87")
                 return true
             end
         end
@@ -91,7 +99,7 @@ SS_Core.RegisterCallback("ss-knowledge:server:fetchBranches", function(source, c
     else
         branches = FetchDBBranches(otherID)
     end
-    TriggerEvent("ss-knowledge:server:debug", "^4Fetch Branches: ^3"..json.encode(branches, {indent = true}).."^0")
+    SS_Log("debug", "^4Fetch Branches: ^3"..json.encode(branches, {indent = true}).."^0", resourceName, false, currentLine.."102")
     cb(branches)
 end)
 

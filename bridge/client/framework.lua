@@ -7,6 +7,10 @@ elseif Framework == 'QB' then
     QBCore = exports['qb-core']:GetCoreObject()
 end
 
+local resourceName = GetCurrentResourceName()
+
+local currentLine = "BRDG>CLNT>FRAME #"
+
 SS_Core = {
 
     PlayerData = {},
@@ -35,6 +39,7 @@ SS_Core = {
         elseif Framework == 'QB' then
             QBCore.Functions.SpawnVehicle(model, cb, coords, networked)
         end
+        SS_Log("debug","^4SpawnVehicle "..tostring(model), resourceName, true, currentLine.."42")
 	end,
 
     DeleteVehicle = function(vehicle)
@@ -43,18 +48,42 @@ SS_Core = {
         elseif Framework == 'QB' then
             QBCore.Functions.DeleteVehicle(vehicle)
         end
+        SS_Log("debug","^4DeleteVehicle "..tostring(vehicle), resourceName, true, currentLine.."42")
     end,
 
     TriggerCallback = function(name, cb, ...)
+        SS_Log("debug","^4TriggerCallback ^0[^3"..name.."^0]", resourceName, true, currentLine.."53")
         if Framework == 'ESX' then
-            TriggerEvent('ss-knowledge:client:debug',"^4ESX TriggerCallback - Client ^0[^3"..name.."^0]")
             ESX.TriggerServerCallback(name, cb, ...)
-            TriggerEvent('ss-knowledge:client:debug',"^4ESX TriggerCallback Finished - Client ^0[^3"..name.."^0]")
         elseif Framework == 'QB' then
-            TriggerEvent('ss-knowledge:client:debug',"^4QB TriggerCallback - Client ^0[^3"..name.."^0]")
             QBCore.Functions.TriggerCallback(name, cb, ...)
-            TriggerEvent('ss-knowledge:client:debug',"^4QB TriggerCallback Finished - Client ^0[^3"..name.."^0]")
         end
+        SS_Log("debug","^4TriggerCallback Finished ^0[^3"..name.."^0]", resourceName, true, currentLine.."59")
+    end,
+
+    SetPlayerJob = function()
+        local table = {}
+        while not SS_Core.PlayerData.job do
+            Wait(200)
+        end
+        if Framework == 'ESX' then
+            table.name = SS_Core.PlayerData.job.name
+            table.label = SS_Core.PlayerData.job.label
+            table.grade = SS_Core.PlayerData.job.grade
+            table.gradeLabel = SS_Core.PlayerData.job.grade_label
+            table.onDuty  = "N/A"
+            --table.isPolice = Config.PoliceJobs[SS_Core.PlayerData.job.name] or false
+        elseif Framework == 'QB' then
+            table.name  = SS_Core.PlayerData.job.name
+            table.label = SS_Core.PlayerData.job.label
+            table.grade  = SS_Core.PlayerData.job.grade.level
+            table.rank  = SS_Core.PlayerData.job.grade.name
+            table.onDuty  = SS_Core.PlayerData.job.onduty or false
+            --table.isPolice = Config.PoliceJobs[SS_Core.PlayerData.job.name] or false
+        end
+        --TriggerEvent('ss-bridge:onJobUpdate', SS_Core.PlayerJob)
+        SS_Log("debug","^4Your Job: [^0"..table.label.."^4] Title: [^0"..table.name.."^4] Duty: [^0"..tostring(table.onDuty).."^4] Grade: [^0"..table.grade.."^4]^0", resourceName, true, currentLine.."83")
+        SS_Core.PlayerJob = table
     end,
 
     GetPlayerData = function()

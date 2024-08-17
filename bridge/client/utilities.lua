@@ -4,6 +4,11 @@ elseif Framework == 'QB' then
     QBCore = exports['qb-core']:GetCoreObject()
 end
 
+local resourceName = GetCurrentResourceName()
+
+local currentLine = "BRDG>CLNT>UTIL #"
+
+
 SS_Utils = {
 
     Notification = function(data)
@@ -34,6 +39,7 @@ SS_Utils = {
 	end,
 
 	GetIdentification = function(data)
+		SS_Log("debug","^4GetIdentification ^0[^3"..PlayerPedId().."^0]", resourceName, true, currentLine.."59")
 		if Framework == "QB" then
 			return QBCore.Functions.GetPlayerData().citizenid
 		elseif Framework == "ESX" then

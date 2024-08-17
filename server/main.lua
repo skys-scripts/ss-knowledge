@@ -1,6 +1,10 @@
+local resourceName = GetCurrentResourceName()
+
+local currentLine = "SRVR>MAIN #"
+
 FetchDBBranches = function(source)
+    SS_Log("debug", "^4FetchDBBranches ^0[^3"..tonumber(source).."^0]", resourceName, false, currentLine.."7")
     local Player = SS_Core.Player.GetIdentifier(source)
-    TriggerEvent("ss-knowledge:server:debug","^4Collecting branch info for player id: ^0[^3"..source.."^0]")
     if Player ~= nil then
         local branches = MySQL.scalar.await('SELECT skills FROM '..Config.Triggers[Framework].playerdatabase..' WHERE '..Config.Triggers[Framework].playerid..' = ?', {Player})
         if string.len(branches) < 5 then
@@ -21,15 +25,15 @@ SortBranches = function(data)
         for branch, value in pairs(data) do
             local str = string.lower(branch)
             str = str:gsub("%s+", "")
-            TriggerEvent('ss-knowledge:server:debug',"^4SortBranch's current branch name:^0^3 "..str)
             if Config.Branches[str] ~= nil then
                 if Config.Branches[str].enable then
                     local xp = value or value.Current
-                    TriggerEvent('ss-knowledge:server:debug',"^4SortBranch's value:^0^3 "..json.encode(xp))
+                    SS_Log("debug","^4SortBranch branch [^3"..str.."^0] ^4value^0 [^3"..json.encode(xp).."^0]", resourceName, false, currentLine.."31")
                     sortedBranches[str] = xp
                 end
             else
-                TriggerEvent('ss-knowledge:server:debug',"Removing branch: " .. branch)
+                SS_Log("debug","^4SortBranch's current branch name:^0^3 "..str, resourceName, false, currentLine.."35")
+                SS_Log("warn","Please add this branch to config and restart else the system will remove ".."^0[^1branch name^0]", resourceName, false, currentLine.."36")
             end
         end
         for branch, data in pairs(Config.Branches) do
@@ -46,7 +50,7 @@ SetupBranches = function()
 	for branch, data in pairs(Config.Branches) do
 		sortedBranches[branch] = 0
 	end
-    TriggerEvent('ss-knowledge:server:debug',"^4sortedBranches table in SetupBranches:^0^3 "..json.encode(sortedBranches))
+    SS_Log("debug","^4sortedBranches table in SetupBranches:^0^3 "..json.encode(sortedBranches), resourceName, false, currentLine.."53")
 	return sortedBranches
 end
 

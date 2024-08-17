@@ -1,8 +1,13 @@
+local resourceName = GetCurrentResourceName()
+
+local currentLine = "CLNT>FUNC #"
+
+
 GetKnowledgeBranch = function(currentBranch, branch)
     local tier = 0
-    TriggerEvent('ss-knowledge:client:debug',"^4Branch:^0 [^3"..branch.. "^0] ^4Current xp:^0 [^3"..currentBranch.."^0]")
+    SS_Log("debug","^4Branch:^0 [^3"..branch.. "^0] ^4Current xp:^0 [^3"..currentBranch.."^0]", resourceName, true, currentLine.."8")
     if  Config.Branches[branch] == nil then
-        print("[^4Sky's Scripts^0] ^1Branch is missing from config's branch list. Missing branch: ^0[^3"..tostring(branch).."^0]")
+        SS_Log("warn","^1Branch is missing from config's branch list. Missing branch: ^0[^3"..tostring(branch).."^0]", resourceName, true, currentLine.."10")
     end
     local tiers =  Config.Branches[branch].customLevels or Config.DefaultLevels
     local tierLimits = tiers[1]
@@ -51,10 +56,10 @@ GetCurrentKnowledgeBranch = function(branch)
         if CurrentBranches[branch] then
             return GetKnowledgeBranch(CurrentBranches[branch],branch)
         else
-            print("[^4Sky's Scripts^0] ^1User missing branch from config's branch list. Missing branch: ^0[^3"..tostring(branch).."^0]")
+            SS_Log("warn","^1User missing branch from config list. Missing branch: ^0[^3"..tostring(branch).."^0]", resourceName, true, currentLine.."59")
         end
     else
-        print("[^4Sky's Scripts^0] ^1User has no level on a branch not found in config. Missing branch: ^0[^3"..tostring(branch).."^0]")
+        SS_Log("warn","^1User has no level on a branch not found in config. Missing branch: ^0[^3"..tostring(branch).."^0]", resourceName, true, currentLine.."62")
         return 0
     end
 end
@@ -62,14 +67,14 @@ exports('GetCurrentKnowledgeBranch', GetCurrentKnowledgeBranch)
 
 FetchKnowledgeBranch = function()
     SS_Core.TriggerCallback("ss-knowledge:server:fetchBranches", function(data)
-        TriggerEvent('ss-knowledge:client:debug','^4Knowledge Branches:^0 '..json.encode(data, {indent=true}))
+        SS_Log("debug",'^4Knowledge Branches:^0 '..json.encode(data, {indent=true}).."^0", resourceName, true, currentLine.."70")
 		CurrentBranches = data
     end)
 end
 
 UpdateKnowledgeBranch = function(branch, amount, LoseBranchKnowledge)
     if not CurrentBranches[branch] then
-        print("[^4Sky's Scripts^0]"..Lang['branch_doesnt_exist']:format(branch))
+        SS_Log("warn","^4"..Lang['branch_doesnt_exist']:format(branch).."^0", resourceName, true, currentLine.."70")
         return
     end
     local id = SS_Utils.GetIdentification()
@@ -152,7 +157,7 @@ CheckKnowledgeBranch = function(branch, value)
             return false
         end
     else
-        print(Lang['branch_doesnt_exist']:format(branch))
+        SS_Log("warn","^4"..Lang['branch_doesnt_exist']:format(branch).."^0", resourceName, true, currentLine.."160")
         return false
     end
 end
@@ -166,7 +171,7 @@ CheckKnowledgeTier = function(branch, value)
             return false
         end
     else
-        print(Lang['branch_doesnt_exist']:format(branch))
+        SS_Log("warn","^4"..Lang['branch_doesnt_exist']:format(branch).."^0", resourceName, true, currentLine.."174")
         return false
     end
 end
@@ -177,7 +182,7 @@ GetCurrentSkill = function(skill)
     if branchInfo ~= nil then
         return {Name = branchInfo.title, Max = branchInfo.maxxp, Min = branchInfo.minxp, Current = tonumber(CurrentBranches[branch])}
     else
-        print("[^4Sky's Scripts^0] GetCurrentSkill is causing errors for branchInfo. Please turn on debug and try again.")
+        SS_Log("warn","^4GetCurrentSkill is causing errors for branchInfo. Please turn on debug^0", resourceName, true, currentLine.."185", branch, branchInfo)
     end
 end
 exports('GetCurrentSkill',GetCurrentSkill)
@@ -206,12 +211,12 @@ exportHandler('GetCurrentSkill', function(branch)
     if branchInfo ~= nil then
         return {Name = branchInfo.title, Max = branchInfo.maxxp, Min = branchInfo.minxp, Current = current}
     else
-        print("[^4Sky's Scripts^0] GetCurrentSkill is causing errors for branchInfo")
+        SS_Log("warn","^4GetCurrentSkill is causing errors for branchInfo^0", resourceName, true, currentLine.."214")
     end
 end)
 
 exportHandler('UpdateSkill', function(branch, amount)
-    TriggerEvent('ss-knowledge:client:debug',string.lower(branch), amount)
+    SS_Log("debug","^4UpdateSkill [branch = ^3"..string.lower(branch).."^4amount = ^3"..tonumber(amount).."^0", resourceName, true, currentLine.."219")
     UpdateKnowledgeBranch(string.lower(branch), amount)
 end)
 
@@ -227,7 +232,7 @@ end)
 
 AddEventHandler(Config.Triggers[Framework].load, function()
     Wait(2000)
-    TriggerEvent('ss-knowledge:client:debug',Lang['loading_player_branches'])
+    SS_Log("debug",Lang['loading_player_branches'], resourceName, true, currentLine.."235")
     FetchKnowledgeBranch()
 end)
 

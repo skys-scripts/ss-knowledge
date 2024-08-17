@@ -4,38 +4,34 @@ game 'gta5'
 author 'Sky\'s Scripts'
 description 'Multi use knowledge/rep/xp resource'
 
-version '1.2'
+version '1.2.1'
 
 shared_scripts {
     '@ox_lib/init.lua', -- if not using ox_lib options please mark this out with the 2 -'s like i have to write this comment
     'language.lua',
 	'config.lua',
+	'bridge/shared/logging.lua',
 }
 
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
-	'server/main.lua',
-	'bridge/server/framework.lua',
-	'bridge/server/utilities.lua',
+	'server/*.lua',
+	'bridge/server/*.lua',
+	'bridge/shared/logging.lua',
 }
 
 client_scripts {
 	'client/*.lua',
 	'bridge/client/*.lua',
+	'bridge/shared/logging.lua',
 }
 
 escrow_ignore {
-	'client/main.lua',
-	'client/gui.lua',
-	'client/commands.lua',
-	'client/functions.lua',
-	'server/main.lua',
+	'client/*.lua',
+	'server/*.lua',
 	'language.lua',
 	'config.lua',
-	'bridge/client/framework.lua',
-	'bridge/client/utilities.lua',
-	'bridge/server/framework.lua',
-	'bridge/server/utilities.lua',
+	'bridge/*/*.lua',
 }
 
 lua54 'yes'
