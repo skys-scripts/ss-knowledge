@@ -67,8 +67,12 @@ exports('GetCurrentKnowledgeBranch', GetCurrentKnowledgeBranch)
 
 FetchKnowledgeBranch = function()
     SS_Core.TriggerCallback("ss-knowledge:server:fetchBranches", function(data)
-        SS_Log("debug",'^4Knowledge Branches:^0 '..json.encode(data, {indent=true}).."^0", resourceName, true, currentLine.."70")
-		CurrentBranches = data
+        if data then
+            SS_Log("debug",'^4Knowledge Branches:^3 '..json.encode(data, {indent=true}).."^0", resourceName, true, currentLine.."70")
+            CurrentBranches = data
+        else
+            SS_Log("warn",'^1If you were logging out or not fully loaded in city please ignore.\n^1If not branches found on load of FetchKnowledgeBranch.^0', resourceName, true, currentLine.."74")
+        end
     end)
 end
 

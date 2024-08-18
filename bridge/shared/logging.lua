@@ -4,6 +4,7 @@ local colorCodes = {
     warn = "^5WARN^0",
     info = "^2INFO^0",
     success = "^2SUCCESS^0",
+    id_debug = "^3ID DEBUG^0",
 }
 
 SS_Log = function(warntype, message, asset, isClient, location, ...)
@@ -13,13 +14,14 @@ SS_Log = function(warntype, message, asset, isClient, location, ...)
     elseif os == nil and not isClient then
         print(string.format("^1Log running client side with isClient variable set to false:^0\n[^3%s^0] [^3%s^0] [^3%s^0] [^3%s^0]", string.upper(warntype), message, asset, location))
     return end
-    if warntype == "debug" and not Config.Debug then return end
+    if warntype == "debug" and not Config.Debug.enable then return end
+    if warntype == "id_debug" and not Config.Debug.idType and not Config.Debug.enable then return end
     if not colorCodes[warntype] then
         warntype = "info"
     end
     local logFormat = isClient and "[^5Sky's Scripts^0] [^3%s^0] [^3%s^0]\n[^3%s^0]" or "[^3%s^0] [^5Sky's Scripts^0] [^3%s^0] [^3%s^0]\n[^3%s^0]"
     local extraInfo = ""
-    if warntype == "debug" and location then
+    if warntype == ("debug" or "id_debug") and location then
         extraInfo = " [^3%s^0]"
     end
     if ... then
@@ -29,7 +31,7 @@ SS_Log = function(warntype, message, asset, isClient, location, ...)
         isClient and asset or timestamp,
         isClient and colorCodes[warntype] or asset,
         isClient and message or colorCodes[warntype],
-        isClient and warntype == "debug" and location or message,
+        isClient and warntype == ("debug" or "id_debug") and location or message,
         location or "",
         table.concat({...}, ", ") or ""
     )

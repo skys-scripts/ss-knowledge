@@ -28,7 +28,7 @@ SortBranches = function(data)
             if Config.Branches[str] ~= nil then
                 if Config.Branches[str].enable then
                     local xp = value or value.Current
-                    SS_Log("debug","^4SortBranch branch [^3"..str.."^0] ^4value^0 [^3"..json.encode(xp).."^0]", resourceName, false, currentLine.."31")
+                    SS_Log("debug","^4SortBranch branch ^0[^3"..str.."^0] ^4value^0 [^3"..json.encode(xp).."^0]", resourceName, false, currentLine.."31")
                     sortedBranches[str] = xp
                 end
             else

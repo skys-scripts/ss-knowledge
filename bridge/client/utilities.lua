@@ -39,7 +39,7 @@ SS_Utils = {
 	end,
 
 	GetIdentification = function(data)
-		SS_Log("debug","^4GetIdentification ^0[^3"..PlayerPedId().."^0]", resourceName, true, currentLine.."59")
+		SS_Log("id_debug","^4GetIdentification ^0[^3"..PlayerPedId().."^0]", resourceName, true, currentLine.."59")
 		if Framework == "QB" then
 			return QBCore.Functions.GetPlayerData().citizenid
 		elseif Framework == "ESX" then

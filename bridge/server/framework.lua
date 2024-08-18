@@ -43,7 +43,7 @@ SS_Core.Player = {
             Wait(500)
             xPlayer = SS_Core.Player.GetFromId(tonumber(src))
         end
-        SS_Log("debug", "^4Server Side - GetSource ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."44")
+        SS_Log("id_debug", "^4Server Side - GetSource ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."44")
         if Framework == 'ESX' then
             return xPlayer.source
         elseif Framework == 'QB' then
@@ -52,7 +52,7 @@ SS_Core.Player = {
     end,
 
     GetFromId = function(src)
-        SS_Log("debug", "^4Server Side - GetFromId ^0[^3"..(src).."^0]", resourceName, false, currentLine.."55")
+        SS_Log("id_debug", "^4Server Side - GetFromId ^0[^3"..(src).."^0]", resourceName, false, currentLine.."55")
         if Framework == 'ESX' then
             return ESX.GetPlayerFromId(src)
         elseif Framework == 'QB' then
@@ -61,8 +61,9 @@ SS_Core.Player = {
     end,
 
     GetIdentifier = function(src)
-        SS_Log("debug", "^4Server Side - GetIdentifier ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."64")
+        SS_Log("id_debug", "^4Server Side - GetIdentifier ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."64")
         local Player = SS_Core.Player.GetFromId(tonumber(src))
+        if Player == nil then return end
         if Framework == 'ESX' then
             return Player.identifier
         elseif Framework == 'QB' then
@@ -71,7 +72,7 @@ SS_Core.Player = {
     end,
 
     GetCitizenName = function(src)
-        SS_Log("debug", "^4Server Side - GetCitizenName ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."74")
+        SS_Log("id_debug", "^4Server Side - GetCitizenName ^0[^3"..tonumber(src).."^0]", resourceName, false, currentLine.."74")
         local Player = SS_Core.Player.GetFromId(tonumber(src))
         if Framework == 'ESX' then
             return Player.getName()
@@ -99,7 +100,7 @@ SS_Core.RegisterCallback("ss-knowledge:server:fetchBranches", function(source, c
     else
         branches = FetchDBBranches(otherID)
     end
-    SS_Log("debug", "^4Fetch Branches: ^3"..json.encode(branches, {indent = true}).."^0", resourceName, false, currentLine.."102")
+    SS_Log("debug", "^4Fetch Branches: ^3"..json.encode(branches, {indent = true}).."^0", resourceName, false, currentLine.."103")
     cb(branches)
 end)
 

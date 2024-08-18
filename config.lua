@@ -33,7 +33,10 @@ Config = {
         },
     },
 
-	Debug = true, -- For debug prints set to true.
+	Debug = {
+        enable = false, -- To enable standard debug prints set to true.
+        idType = false, -- For ID debug prints (getting source or identifier etc) if true will increase cpu usage a little more
+    },
 
     DefaultLevels = { -- Level system to check xp amount modify to change xp per level.
         {title = Lang['default_level_1'], minxp = 00, maxxp = 200},
