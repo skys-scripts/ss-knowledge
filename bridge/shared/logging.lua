@@ -21,7 +21,7 @@ SS_Log = function(warntype, message, asset, isClient, location, ...)
     end
     local logFormat = isClient and "[^5Sky's Scripts^0] [^3%s^0] [^3%s^0]\n[^3%s^0]" or "[^3%s^0] [^5Sky's Scripts^0] [^3%s^0] [^3%s^0]\n[^3%s^0]"
     local extraInfo = ""
-    if warntype == ("debug" or "id_debug") and location then
+    if (warntype == "debug" or warntype == "id_debug") and location then
         extraInfo = " [^3%s^0]"
     end
     if ... then
@@ -31,7 +31,7 @@ SS_Log = function(warntype, message, asset, isClient, location, ...)
         isClient and asset or timestamp,
         isClient and colorCodes[warntype] or asset,
         isClient and message or colorCodes[warntype],
-        isClient and warntype == ("debug" or "id_debug") and location or message,
+        isClient and (warntype == "debug" or warntype == "id_debug") and location or message,
         location or "",
         table.concat({...}, ", ") or ""
     )
