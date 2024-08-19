@@ -7,7 +7,7 @@ FetchDBBranches = function(source)
     local Player = SS_Core.Player.GetIdentifier(source)
     if Player ~= nil then
         local branches = MySQL.scalar.await('SELECT skills FROM '..Config.Triggers[Framework].playerdatabase..' WHERE '..Config.Triggers[Framework].playerid..' = ?', {Player})
-        if string.len(branches) < 5 then
+        if branches == nil or branches == "NULL" then
             branches = SetupBranches()
             UpdateDBBranches(source, json.encode(branches))
             return SortBranches(branches)
